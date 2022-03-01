@@ -17,7 +17,7 @@
 
 # Implements a BLE HID keyboard
 import time
-from machine import SoftSPI, Pin
+# from machine import SoftSPI, Pin
 from hid_services import Keyboard
 
 class Device:
@@ -29,10 +29,10 @@ class Device:
         self.key3 = 0x00
 
         # Define buttons
-        self.pin_forward = Pin(5, Pin.IN)
-        self.pin_reverse = Pin(23, Pin.IN)
-        self.pin_right = Pin(19, Pin.IN)
-        self.pin_left = Pin(18, Pin.IN)
+        # self.pin_forward = Pin(5, Pin.IN)
+        # self.pin_reverse = Pin(23, Pin.IN)
+        # self.pin_right = Pin(19, Pin.IN)
+        # self.pin_left = Pin(18, Pin.IN)
 
         # Create our device
         self.keyboard = Keyboard("Keyboard")
@@ -65,25 +65,10 @@ class Device:
     def start(self):
         while True:
             # Read pin values and update variables
-            if self.pin_forward.value():
-                self.key0 = 0x1A  # W
-            else:
-                self.key0 = 0x00
-
-            if self.pin_left.value():
-                self.key1 = 0x04  # A
-            else:
-                self.key1 = 0x00
-
-            if self.pin_reverse.value():
-                self.key2 = 0x16  # S
-            else:
-                self.key2 = 0x00
-
-            if self.pin_right.value():
-                self.key3 = 0x07  # D
-            else:
-                self.key3 = 0x00
+            self.key0 = 0x1A  # W
+            self.key1 = 0x00
+            self.key2 = 0x00
+            self.key3 = 0x00
 
             # If the variables changed do something depending on the device state
             if (self.key0 != 0x00) or (self.key1 != 0x00) or (self.key2 != 0x00) or (self.key3 != 0x00):
